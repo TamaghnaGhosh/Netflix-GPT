@@ -10,7 +10,9 @@ const Header = () => {
           alt="logo"
         />
       </div>
-      <form className="w-3/12 absolute p-12 bg-black my-36 mx-auto right-0 left-0"></form>
+      <form className="w-3/12 absolute p-12 bg-black my-36 mx-auto right-0 left-0">
+        
+      </form>
     </div>
   );
 };
