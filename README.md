@@ -4,7 +4,8 @@
 - Header
 - Login form
 - Sign up form
-
+- Form Validation
+- useRef hook
 
 # Features
 - Login/sign up

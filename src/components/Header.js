@@ -1,10 +1,34 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
+import { checkValidData } from "../utils/validate";
 
 const Header = () => {
+  const fullname = useRef(null);
+  const email = useRef(null);
+  const password = useRef(null);
   const [isSignInForm, setSignInForm] = useState(true);
+  const [errorMsg, setErrorMsg] = useState(null);
 
   const toggleSignInForm = () => {
     setSignInForm(!isSignInForm);
+  };
+
+  const handleSubmitFom = (e) => {
+    const message = checkValidData(email.current.value, password.current.value);
+    setErrorMsg(message);
+    if (message === null && !isSignInForm) {
+      console.log({
+        fullname: fullname.current.value,
+        email: email.current.value,
+        password: password.current.value,
+      });
+      document.getElementById("reset").click();
+    } else {
+      console.log({
+        email: email.current.value,
+        password: password.current.value,
+      });
+      document.getElementById("reset").click();
+    }
   };
 
   return (
@@ -16,30 +40,47 @@ const Header = () => {
           alt="logo"
         />
       </div>
-      <form className="w-3/12 absolute p-12 bg-black my-36 mx-auto right-0 left-0 text-white bg-opacity-80">
+      <form
+        onSubmit={(e) => e.preventDefault()}
+        className="w-3/12 absolute p-12 bg-black my-36 mx-auto right-0 left-0 text-white bg-opacity-80"
+      >
         <h1 className="font-semibold text-3xl py-4">
           {isSignInForm ? "Sign In" : "Sign Up"}
         </h1>
         {!isSignInForm && (
           <input
             type="text"
+            ref={fullname}
+            id="fullname"
+            name="fullname"
             className="p-3 my-2 rounded-md bg-[#333] w-full"
             placeholder="Full Name"
           />
         )}
         <input
           type="text"
+          id="email"
+          ref={email}
+          name="email"
           className="p-3 my-2 rounded-md bg-[#333] w-full"
           placeholder="Email or phone number"
         />
         <input
           type="password"
+          ref={password}
           className="p-3 my-2 rounded-md bg-[#333] w-full"
+          id="password"
+          name="password"
           placeholder="password"
         />
-        <button className="p-4 my-4 rounded-md w-full bg-[#e50914] font-medium text-xl">
+        <span className="text-red-600">{errorMsg}</span>
+        <button
+          className="p-4 my-4 rounded-md w-full bg-[#e50914] font-medium text-xl"
+          onClick={handleSubmitFom}
+        >
           {isSignInForm ? "Sign In" : "Sign Up"}
         </button>
+        <button type="reset" id="reset" className="hidden">Reset</button>
         <p
           className="font-normal mt-10 cursor-pointer"
           onClick={toggleSignInForm}
