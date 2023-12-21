@@ -80,7 +80,10 @@ const Header = () => {
         >
           {isSignInForm ? "Sign In" : "Sign Up"}
         </button>
-        <button type="reset" id="reset" className="hidden">Reset</button>
+        {/* This portion is a work in progress */}
+        <button type="reset" id="reset" className="hidden">
+          Reset
+        </button>
         <p
           className="font-normal mt-10 cursor-pointer"
           onClick={toggleSignInForm}
