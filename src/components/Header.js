@@ -1,98 +1,18 @@
-import React, { useRef, useState } from "react";
-import { checkValidData } from "../utils/validate";
-
 const Header = () => {
-  const fullname = useRef(null);
-  const email = useRef(null);
-  const password = useRef(null);
-  const [isSignInForm, setSignInForm] = useState(true);
-  const [errorMsg, setErrorMsg] = useState(null);
 
-  const toggleSignInForm = () => {
-    setSignInForm(!isSignInForm);
-  };
-
-  const handleSubmitFom = (e) => {
-    const message = checkValidData(email.current.value, password.current.value);
-    setErrorMsg(message);
-    if (message === null && !isSignInForm) {
-      console.log({
-        fullname: fullname.current.value,
-        email: email.current.value,
-        password: password.current.value,
-      });
-      document.getElementById("reset").click();
-    } else {
-      console.log({
-        email: email.current.value,
-        password: password.current.value,
-      });
-      document.getElementById("reset").click();
-    }
-  };
+  // What script should be run before every deploy? (npm ci && npm run build)
+  // netflixgpt-ac9da
+  // https://accounts.google.com/o/oauth2/auth?client_id=563584335869-fgrhgmd47bqnekij5i8b5pr03ho849e6.apps.googleusercontent.com&scope=email%20openid%20https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcloudplatformprojects.readonly%20https%3A%2F%2Fwww.googleapis.com%2Fauth%2Ffirebase%20https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcloud-platform&response_type=code&state=685393554&redirect_uri=http%3A%2F%2Flocalhost%3A9005
 
   return (
     <div>
-      <div className="absolute px-8 py-4 bg-gradient-to-b from-black">
+      <div className="absolute px-8 py-4 bg-gradient-to-b from-black z-10">
         <img
           className="w-44"
           src="https://cdn.cookielaw.org/logos/dd6b162f-1a32-456a-9cfe-897231c7763c/4345ea78-053c-46d2-b11e-09adaef973dc/Netflix_Logo_PMS.png"
           alt="logo"
         />
       </div>
-      <form
-        onSubmit={(e) => e.preventDefault()}
-        className="w-3/12 absolute p-12 bg-black my-36 mx-auto right-0 left-0 text-white bg-opacity-80"
-      >
-        <h1 className="font-semibold text-3xl py-4">
-          {isSignInForm ? "Sign In" : "Sign Up"}
-        </h1>
-        {!isSignInForm && (
-          <input
-            type="text"
-            ref={fullname}
-            id="fullname"
-            name="fullname"
-            className="p-3 my-2 rounded-md bg-[#333] w-full"
-            placeholder="Full Name"
-          />
-        )}
-        <input
-          type="text"
-          id="email"
-          ref={email}
-          name="email"
-          className="p-3 my-2 rounded-md bg-[#333] w-full"
-          placeholder="Email or phone number"
-        />
-        <input
-          type="password"
-          ref={password}
-          className="p-3 my-2 rounded-md bg-[#333] w-full"
-          id="password"
-          name="password"
-          placeholder="password"
-        />
-        <span className="text-red-600">{errorMsg}</span>
-        <button
-          className="p-4 my-4 rounded-md w-full bg-[#e50914] font-medium text-xl"
-          onClick={handleSubmitFom}
-        >
-          {isSignInForm ? "Sign In" : "Sign Up"}
-        </button>
-        {/* This portion is a work in progress */}
-        <button type="reset" id="reset" className="hidden">
-          Reset
-        </button>
-        <p
-          className="font-normal mt-10 cursor-pointer"
-          onClick={toggleSignInForm}
-        >
-          {isSignInForm
-            ? "New to Netflix? Sign up now."
-            : "Already registered Sign In Now...."}
-        </p>
-      </form>
     </div>
   );
 };
