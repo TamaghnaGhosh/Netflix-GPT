@@ -1,8 +1,19 @@
 import React, { useRef, useState } from "react";
 import Header from "./Header";
 import { checkValidData } from "../utils/validate";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  updateProfile,
+} from "firebase/auth";
+import { auth } from "../utils/firebase";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { addUser } from "../utils/userSlice";
 
 const Login = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const fullname = useRef(null);
   const email = useRef(null);
   const password = useRef(null);
@@ -22,19 +33,58 @@ const Login = () => {
     // Sign In / Sign Up
     if (!isSignInForm) {
       //Sign Up Logic
-      console.log({
-        fullname: fullname.current.value,
-        email: email.current.value,
-        password: password.current.value,
-      });
-      document.getElementById("reset").click();
+      createUserWithEmailAndPassword(
+        auth,
+        email.current.value,
+        password.current.value
+      )
+        .then((userCredential) => {
+          const user = userCredential.user;
+
+          updateProfile(user, {
+            displayName: fullname.current.value,
+            photoURL: "https://avatars.githubusercontent.com/u/115780787?v=4",
+          })
+            .then(() => {
+              // Profile updated!
+              const { uid, email, displayName, photoURL } = auth.currentUser;
+              dispatch(
+                addUser({
+                  uid: uid,
+                  email: email,
+                  displayName: displayName,
+                  photoURL: photoURL,
+                })
+              );
+              navigate("browse");
+            })
+            .catch((error) => {
+              // An error occurred
+              setErrorMsg(error.message);
+            });
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          setErrorMsg(errorCode + "-" + errorMessage);
+        });
     } else {
       //Sign In Logic
-      console.log({
-        email: email.current.value,
-        password: password.current.value,
-      });
-      document.getElementById("reset").click();
+      signInWithEmailAndPassword(
+        auth,
+        email.current.value,
+        password.current.value
+      )
+        .then((userCredential) => {
+          const user = userCredential.user;
+          console.log(user);
+          navigate("browse");
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          setErrorMsg(errorCode + "-" + errorMessage);
+        });
     }
 
     // if (message === null && !isSignInForm && fullname.current.value !== "") {
@@ -101,10 +151,6 @@ const Login = () => {
           onClick={handleSubmitFom}
         >
           {isSignInForm ? "Sign In" : "Sign Up"}
-        </button>
-        {/* This portion is a work in progress */}
-        <button type="reset" id="reset" className="hidden">
-          Reset
         </button>
         <p
           className="font-normal mt-10 cursor-pointer"
