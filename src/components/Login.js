@@ -7,12 +7,11 @@ import {
   updateProfile,
 } from "firebase/auth";
 import { auth } from "../utils/firebase";
-import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
 
 const Login = () => {
-  const navigate = useNavigate();
+  
   const dispatch = useDispatch();
   const fullname = useRef(null);
   const email = useRef(null);
@@ -56,7 +55,7 @@ const Login = () => {
                   photoURL: photoURL,
                 })
               );
-              navigate("browse");
+              // navigate("browse");
             })
             .catch((error) => {
               // An error occurred
@@ -78,7 +77,7 @@ const Login = () => {
         .then((userCredential) => {
           const user = userCredential.user;
           console.log(user);
-          navigate("browse");
+          // navigate("browse");
         })
         .catch((error) => {
           const errorCode = error.code;
@@ -87,20 +86,6 @@ const Login = () => {
         });
     }
 
-    // if (message === null && !isSignInForm && fullname.current.value !== "") {
-    //   console.log({
-    //     fullname: fullname.current.value,
-    //     email: email.current.value,
-    //     password: password.current.value,
-    //   });
-    //   document.getElementById("reset").click();
-    // } else {
-    //   console.log({
-    //     email: email.current.value,
-    //     password: password.current.value,
-    //   });
-    //   document.getElementById("reset").click();
-    // }
   };
   return (
     <div>
