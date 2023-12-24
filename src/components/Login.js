@@ -9,6 +9,7 @@ import {
 import { auth } from "../utils/firebase";
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
+import { AVATAR_URl, BG_IMG } from "../utils/constant";
 
 const Login = () => {
   
@@ -42,7 +43,7 @@ const Login = () => {
 
           updateProfile(user, {
             displayName: fullname.current.value,
-            photoURL: "https://avatars.githubusercontent.com/u/115780787?v=4",
+            photoURL: AVATAR_URl,
           })
             .then(() => {
               // Profile updated!
@@ -93,7 +94,7 @@ const Login = () => {
       <div className="absolute">
         <img
           className="concord-img vlv-creative"
-          src="https://assets.nflxext.com/ffe/siteui/vlv3/ca6a7616-0acb-4bc5-be25-c4deef0419a7/c5af601a-6657-4531-8f82-22e629a3795e/IN-en-20231211-popsignuptwoweeks-perspective_alpha_website_small.jpg"
+          src={BG_IMG}
           alt="bg-img"
         />
       </div>
