@@ -10,7 +10,6 @@ const Header = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const User = useSelector((store) => store.user);
-
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -54,6 +53,7 @@ const Header = () => {
       <img className="w-44" src={LOGO_URL} alt="logo" />
       {User && (
         <div className="flex p-2">
+          <span className="font-semibold text-white mt-4 mx-2 hover:text-black">{User?.displayName}</span>
           <img
             className="w-12 rounded-md h-12"
             src={User?.photoURL || AVATAR_URl}
