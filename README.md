@@ -30,7 +30,7 @@
 - Tailwind classes to make MainContainer look awesome
 - 
 
-#### How was the browser page planning to start working -----------
+# How was the browser page planning to start working -----------
 
 ## Maincontainer
     - VideoBackground
@@ -39,7 +39,7 @@
     - movielist * n
       - cards * n
 
-#### end----------------------
+# End----------------------
 
 # Features
 
