@@ -28,6 +28,7 @@
 - Update store with trailer video data
 - Embedded the youtube trailer video and make it autoplay & mute
 - Tailwind classes to make MainContainer look awesome
+- Start to build the secondaryContainer
 - 
 
 # How was the browser page planning to start working -----------
