@@ -1,12 +1,11 @@
 # Netflix GPT
-
 - We did it a Create-React_app
 - Configure tailwind css files
 - Header
 - Login form
 - Sign up form
 - Form Validation
-- useRef hook
+- UseRef hook
 - Firebase Setup
 - Deploing our project to production
 - Create a sign up user account
@@ -21,6 +20,15 @@
 - Add Hardcoded values to the constant file.
 - Register TMDB API & create an application & get access token
 - Get data from TMDB now playing movies list API
+- Custom hooks for now playing
+- Create a movieSlice
+- Update store with movies data
+- planning for maincontainer & secondary container
+- Fetch data for trailer video
+- Update store with trailer video data
+- Embedded the youtube trailer video and make it autoplay & mute
+- Tailwind classes to make MainContainer look awesome
+- 
 
 <!--
 ## Maincontainer
