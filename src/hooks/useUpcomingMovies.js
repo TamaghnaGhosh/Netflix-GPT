@@ -1,22 +1,22 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { addNowPlayingMovies } from "../utils/moviesSlice";
+import { addUpcomingMovies } from "../utils/moviesSlice";
 import { API_OPTIONS } from "../utils/constant";
 
-const useNowPlayingMovies = () => {
+const useUpcomingMovies = () => {
   const dispatch = useDispatch();
-  const getNowPlayingMovies = async () => {
+  const getUpcomingMovies = async () => {
     const data = await fetch(
-      "https://api.themoviedb.org/3/movie/now_playing?page=5",
+      "https://api.themoviedb.org/3/movie/upcoming?page=1",
       API_OPTIONS
     );
     const json = await data.json();
-    dispatch(addNowPlayingMovies(json?.results));
+    dispatch(addUpcomingMovies(json?.results));
   };
   useEffect(() => {
-    getNowPlayingMovies();
+    getUpcomingMovies();
   }, []);
 };
 
-export default useNowPlayingMovies;
+export default useUpcomingMovies;

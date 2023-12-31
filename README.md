@@ -29,7 +29,14 @@
 - Embedded the youtube trailer video and make it autoplay & mute
 - Tailwind classes to make MainContainer look awesome
 - Start to build the secondaryContainer
-- 
+- Build the movie list
+- Build the movie card
+- TMDB image cdn url
+- Made the brower page amazing with tailwind css
+- useNowPlayingMovies custom hooks
+- usePopularMovies custom hooks
+- useTopRatedMovies custom hooks
+- useUpcomingMovies custom hooks
 
 # How was the browser page planning to start working -----------
 
