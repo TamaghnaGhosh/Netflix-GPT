@@ -37,6 +37,8 @@
 - usePopularMovies custom hooks
 - useTopRatedMovies custom hooks
 - useUpcomingMovies custom hooks
+- GPT search feature
+-
 
 # How was the browser page planning to start working -----------
 
