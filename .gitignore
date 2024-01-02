@@ -7,6 +7,7 @@
 .vscode
 /.github
 /.firebase
+.env
 
 # testing
 /coverage

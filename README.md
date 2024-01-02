@@ -38,7 +38,11 @@
 - useTopRatedMovies custom hooks
 - useUpcomingMovies custom hooks
 - GPT search feature
--
+- GPT search page
+- GPT search Bar
+- Multi-language feature feature our application
+- Integrate GPT API
+
 
 # How was the browser page planning to start working -----------
 
