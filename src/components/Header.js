@@ -4,13 +4,15 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { addUser, removeUser } from "../utils/userSlice";
-import { AVATAR_URl, LOGO_URL } from "../utils/constant";
+import { AVATAR_URl, LOGO_URL, SUPPORTED_LANGUAGES } from "../utils/constant";
 import { toggleGptSearchView } from "../utils/gptSlice";
+import { changeLanguage } from "../utils/configSlice";
 
 const Header = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const User = useSelector((store) => store.user);
+  const showGpt = useSelector((store) => store.gpt.showGptSearch);
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -53,14 +55,31 @@ const Header = () => {
     dispatch(toggleGptSearchView());
   };
 
+  const handleLangSelect = (e) => {
+    // console.log(e.target.value);
+    dispatch(changeLanguage(e.target.value));
+  };
+
   return (
     <div className="absolute w-screen px-8 py-4 bg-gradient-to-b from-black z-10 flex justify-between">
       <img className="w-44" src={LOGO_URL} alt="logo" />
       {User && (
         <div className="flex p-2">
+          {showGpt && (
+            <select
+              className="p-2 m-2 bg-gray-900 text-white rounded-lg"
+              onChange={handleLangSelect}
+            >
+              {SUPPORTED_LANGUAGES.map((lang) => (
+                <option key={lang.identifier} value={lang.identifier}>
+                  {lang.name}
+                </option>
+              ))}
+            </select>
+          )}
           <li className="flex relative group">
             <img
-              className="w-12 rounded-md h-12 mx-2 cursor-pointer"
+              className="w-12 rounded-lg h-12 mx-3 cursor-pointer"
               src={User?.photoURL || AVATAR_URl}
               alt="userIcon"
             />
@@ -86,7 +105,7 @@ const Header = () => {
             className="text-white px-2 bg-purple-800 p-2 m-2 rounded-lg hover:bg-purple-500"
             onClick={handleGptSearchClick}
           >
-            GPT Search
+            {showGpt ? "Homepage" : "GPT Search"}
           </button>
 
           {/* <div className="ml-1 py-4 text-white">
