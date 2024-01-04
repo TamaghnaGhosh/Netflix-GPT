@@ -2,23 +2,13 @@ import React, { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import lang from "../../utils/languageConstants";
 import openai from "../../utils/services/openAi";
-import { API_OPTIONS } from "../../utils/constant";
 import { addGptMovieResult } from "../../utils/gptSlice";
+import { fetchMovieFromTMDB } from "../../hooks/useMultilplePromise";
 
 const GptSearchBar = () => {
   const langKey = useSelector((store) => store.config.lang);
   const dispatch = useDispatch();
   const searchText = useRef(null);
-
-  //Search movie in TMDB database
-  const fetchMovieFromTMDB = async (movies) => {
-    const fetchMovieData = await fetch(
-      `https://api.themoviedb.org/3/search/movie?query=${movies}&include_adult=false&language=en-US&page=1`,
-      API_OPTIONS
-    );
-    const json = await fetchMovieData?.json();
-    return json?.results;
-  };
 
   const handleGptSearchClick = async () => {
     //Make an api call to GPT api and get movie results
@@ -31,38 +21,29 @@ const GptSearchBar = () => {
       messages: [{ role: "user", content: gptQuery }],
       model: "gpt-3.5-turbo",
     });
-
+    
     const gptMovieResponse =
       gptResponse.choices?.[0]?.message?.content?.split(",");
 
     const promiseArrayOfMovies = gptMovieResponse?.map((itemMoviesGptGives) =>
-      fetchMovieFromTMDB(itemMoviesGptGives?.trim())
+      //Search movie in TMDB database
+      fetchMovieFromTMDB(itemMoviesGptGives)
     );
-
-    const tmdbResults = await Promise.all(promiseArrayOfMovies);
-
+    const tmdbResults = await Promise.allSettled(promiseArrayOfMovies);
+    const movieResultsPush = [];
+    for (const result of tmdbResults) {
+      if (result.status === "fulfilled") {
+        movieResultsPush.push(result.value);
+      } else {
+        console.error(result.reason);
+      }
+    }
     dispatch(
       addGptMovieResult({
         movieNames: gptMovieResponse,
-        movieResults: tmdbResults,
+        movieResults: movieResultsPush,
       })
     );
-    console.log(
-      "🚀 ~ file: GptSearchBar.js:40 ~ handleGptSearchClick ~ tmdbResults:",
-      tmdbResults
-    );
-    // const tmdbResults = await Promise.allSettled(promiseArrayOfMovies);
-    // for (const result of tmdbResults) {
-    //   if (result.status === "fulfilled") {
-    //    dispatch(addGptMovieResult(result.value));
-    //   } else {
-    //     console.error(result.reason);
-    //   }
-    // }
-    // console.log(
-    //   "🚀 ~ file: GptSearchBar.js:55 ~ handleGptSearchClick ~ tmdbResults:",
-    //   tmdbResults
-    // );
   };
 
   return (

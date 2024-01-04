@@ -12,7 +12,6 @@ import { addUser } from "../utils/userSlice";
 import { AVATAR_URl, BG_IMG } from "../utils/constant";
 
 const Login = () => {
-  
   const dispatch = useDispatch();
   const fullname = useRef(null);
   const email = useRef(null);
@@ -86,17 +85,12 @@ const Login = () => {
           setErrorMsg(errorCode + "-" + errorMessage);
         });
     }
-
   };
   return (
     <div>
       <Header />
-      <div className="absolute">
-        <img
-          className="concord-img vlv-creative"
-          src={BG_IMG}
-          alt="bg-img"
-        />
+      <div className="fixed">
+        <img className="concord-img vlv-creative" src={BG_IMG} alt="bg-img" />
       </div>
       <form
         onSubmit={(e) => e.preventDefault()}
