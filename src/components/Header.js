@@ -61,12 +61,12 @@ const Header = () => {
   };
 
   return (
-    <div className="absolute w-screen px-8 py-4 bg-gradient-to-b from-black z-10 flex justify-between">
+    <div className="absolute w-screen px-8 py-4 bg-gradient-to-b from-black z-10 flex md:flex-row flex-col justify-between ">
       <div className="cursor-pointer" onClick={handleGptSearchClick}>
-        <img className="w-44" src={LOGO_URL} alt="logo" />
+        <img className="w-44 md:mx-0 mx-auto" src={LOGO_URL} alt="logo" />
       </div>
       {User && (
-        <div className="flex p-2">
+        <div className="flex p-2 justify-between">
           {showGpt && (
             <select
               className="p-2 m-2 bg-gray-900 text-white rounded-lg"

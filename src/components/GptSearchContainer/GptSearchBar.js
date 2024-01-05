@@ -21,7 +21,7 @@ const GptSearchBar = () => {
       messages: [{ role: "user", content: gptQuery }],
       model: "gpt-3.5-turbo",
     });
-    
+
     const gptMovieResponse =
       gptResponse.choices?.[0]?.message?.content?.split(",");
 
@@ -47,9 +47,9 @@ const GptSearchBar = () => {
   };
 
   return (
-    <div className="pt-[10%] flex justify-center">
+    <div className="pt-[50%] md:pt-[10%] flex justify-center">
       <form
-        className="w-1/2 bg-black grid grid-cols-12 rounded-md"
+        className="w-full md:w-1/2 bg-black grid grid-cols-12 rounded-md"
         onSubmit={(e) => e.preventDefault()}
       >
         <input
@@ -59,7 +59,7 @@ const GptSearchBar = () => {
           placeholder={lang[langKey].gptSearchPlaceholder}
         />
         <button
-          className="col-span-3 m-4 py-2 px-4 bg-red-700 hover:bg-red-400 text-white rounded-lg"
+          className="col-span-3  md:m-4 py-2 px-4 m-3 bg-red-700 hover:bg-red-400 text-white rounded-lg"
           onClick={handleGptSearchClick}
         >
           {lang[langKey].search}

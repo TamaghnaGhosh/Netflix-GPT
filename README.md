@@ -42,7 +42,16 @@
 - GPT search Bar
 - Multi-language feature feature our application
 - Integrate GPT API
-
+- Before starting the application add .env file and TMDB && openai key into it
+- Get Open AI Api Key
+- Gpt Search API Call
+- Fetched gptMoviesSuggestions from TMDB
+- Created gptSlice added data
+- Resused Movie List component to make movie suggestion container
+- Memoization
+- Added .env file
+- Adding .env file to gitignore
+- Made our Site Responsive
 
 # How was the browser page planning to start working -----------
 

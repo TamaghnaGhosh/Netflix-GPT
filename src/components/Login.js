@@ -90,11 +90,11 @@ const Login = () => {
     <div>
       <Header />
       <div className="fixed">
-        <img className="concord-img vlv-creative" src={BG_IMG} alt="bg-img" />
+        <img className="h-screen object-cover md:h-auto" src={BG_IMG} alt="bg-img" />
       </div>
       <form
         onSubmit={(e) => e.preventDefault()}
-        className="w-3/12 absolute p-12 bg-black my-36 mx-auto right-0 left-0 text-white bg-opacity-80"
+        className="w-full md:w-3/12 absolute p-12 bg-black my-36 mx-auto right-0 left-0 text-white bg-opacity-80"
       >
         <h1 className="font-semibold text-3xl py-4">
           {isSignInForm ? "Sign In" : "Sign Up"}
