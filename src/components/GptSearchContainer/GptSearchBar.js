@@ -2,7 +2,7 @@ import React, { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import lang from "../../utils/languageConstants";
 import openai from "../../utils/services/openAi";
-import { addGptMovieResult } from "../../utils/gptSlice";
+import { addGptMovieResult } from "../../utils/Redux/gptSlice";
 import { fetchMovieFromTMDB } from "../../hooks/useMultilplePromise";
 
 const GptSearchBar = () => {
@@ -59,7 +59,7 @@ const GptSearchBar = () => {
           placeholder={lang[langKey].gptSearchPlaceholder}
         />
         <button
-          className="col-span-3 m-4 py-2 px-4 bg-red-700 text-white rounded-lg"
+          className="col-span-3 m-4 py-2 px-4 bg-red-700 hover:bg-red-400 text-white rounded-lg"
           onClick={handleGptSearchClick}
         >
           {lang[langKey].search}
