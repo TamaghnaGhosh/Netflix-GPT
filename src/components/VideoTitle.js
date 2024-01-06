@@ -1,12 +1,21 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
-const VideoTitle = ({ title, overview }) => {
+const VideoTitle = ({ title, overview, id }) => {
+  const navigate = useNavigate();
+
+  const handlePlay = () => {
+    navigate(`/browse/watch/${id}`);
+  };
   return (
     <div className="w-screen aspect-video pt-[20%] px-3 md:px-12 absolute text-white bg-gradient-to-r from-black">
       <h1 className="text-xl md:text-6xl font-semibold">{title}</h1>
       <p className="hidden md:inline-block py-6 text-lg w-1/4">{overview}</p>
       <div className="my-4 md:m-0">
-        <button className="bg-white hover:bg-opacity-50 hover:text-white text-black py-1 md:py-4 px-3 md:px-12 text-xl rounded-lg">
+        <button
+          className="bg-white hover:bg-opacity-50 hover:text-white text-black py-1 md:py-4 px-3 md:px-12 text-xl rounded-lg"
+          onClick={handlePlay}
+        >
           Watch
         </button>
         <button className="hidden md:inline-block mx-2 bg-gray-500 hover:bg-gray-500 text-white py-4 px-12 text-xl bg-opacity-50 rounded-lg">

@@ -1,14 +1,17 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { addTrailerVideo } from "../utils/Redux/moviesSlice";
 import { API_OPTIONS } from "../utils/constant";
 
+// import { useDispatch, useSelector } from "react-redux";
+
 const useMovieTrailer = (movieId) => {
   const dispatch = useDispatch();
-  const trailerVideoInStore = useSelector(
-    (store) => store?.movies?.trailerVideo
-  );
+  // const trailerVideoInStore = useSelector(
+  //   (store) => store?.movies?.trailerVideo
+  // );
   // fetch trailer video & updating the store with trailer video data
   const getMovieVideo = async () => {
     const movieVideos = await fetch(
@@ -24,7 +27,7 @@ const useMovieTrailer = (movieId) => {
     dispatch(addTrailerVideo(trailer));
   };
   useEffect(() => {
-    !trailerVideoInStore && getMovieVideo();
+    getMovieVideo();
   }, []);
 };
 
