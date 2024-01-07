@@ -6,6 +6,7 @@ import { API_OPTIONS } from "../utils/constant";
 
 const useNowPlayingMovies = () => {
   const dispatch = useDispatch();
+  const User = useSelector((store) => store.user);
   const nowPlayingMoviesInStore = useSelector(
     (store) => store?.movies?.nowPlayingMovies
   );
@@ -18,8 +19,8 @@ const useNowPlayingMovies = () => {
     dispatch(addNowPlayingMovies(json?.results));
   };
   useEffect(() => {
-    !nowPlayingMoviesInStore && getNowPlayingMovies();
-  }, []);
+    User && !nowPlayingMoviesInStore && getNowPlayingMovies();
+  }, [User]);
 };
 
 export default useNowPlayingMovies;

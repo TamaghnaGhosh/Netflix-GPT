@@ -6,6 +6,7 @@ import { API_OPTIONS } from "../utils/constant";
 
 const useTopRatedMovies = () => {
   const dispatch = useDispatch();
+  const User = useSelector((store) => store.user);
   const topRatedMoviesInStore = useSelector(
     (store) => store?.movies?.topRatedMovies
   );
@@ -18,8 +19,8 @@ const useTopRatedMovies = () => {
     dispatch(addTopRatedMovies(json?.results));
   };
   useEffect(() => {
-    !topRatedMoviesInStore && getTopRatedMovies();
-  }, []);
+    User && !topRatedMoviesInStore && getTopRatedMovies();
+  }, [User]);
 };
 
 export default useTopRatedMovies;

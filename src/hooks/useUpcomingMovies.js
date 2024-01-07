@@ -6,6 +6,7 @@ import { API_OPTIONS } from "../utils/constant";
 
 const useUpcomingMovies = () => {
   const dispatch = useDispatch();
+  const User = useSelector((store) => store.user);
   const upcomingMoviesInStore = useSelector(
     (store) => store?.movies?.upcomingMovies
   );
@@ -18,8 +19,8 @@ const useUpcomingMovies = () => {
     dispatch(addUpcomingMovies(json?.results));
   };
   useEffect(() => {
-    !upcomingMoviesInStore && getUpcomingMovies();
-  }, []);
+    User && !upcomingMoviesInStore && getUpcomingMovies();
+  }, [User]);
 };
 
 export default useUpcomingMovies;

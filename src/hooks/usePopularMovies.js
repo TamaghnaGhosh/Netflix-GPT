@@ -6,6 +6,7 @@ import { API_OPTIONS } from "../utils/constant";
 
 const usePopularMovies = () => {
   const dispatch = useDispatch();
+  const User = useSelector((store) => store.user);
   const popularMoviesInStore = useSelector(
     (store) => store?.movies?.popularMovies
   );
@@ -18,8 +19,8 @@ const usePopularMovies = () => {
     dispatch(addPopularMovies(json?.results));
   };
   useEffect(() => {
-    !popularMoviesInStore && getPopularMovies();
-  }, []);
+    User && !popularMoviesInStore && getPopularMovies();
+  }, [User]);
 };
 
 export default usePopularMovies;
