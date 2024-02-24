@@ -2,16 +2,19 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addNowPlayingMovies } from "../utils/Redux/moviesSlice";
-import { API_OPTIONS } from "../utils/constant";
-import axios from "axios";
+import { axiosInstance } from "../utils/constant";
 
 const useNowPlayingMovies = () => {
   const dispatch = useDispatch();
   const User = useSelector((store) => store.user);
   const nowPlayingMoviesInStore = useSelector((store) => store?.movies?.nowPlayingMovies);
   const getNowPlayingMovies = async () => {
-    const response = await axios.get("https://api.themoviedb.org/3/movie/now_playing?page=1",API_OPTIONS);
-    dispatch(addNowPlayingMovies(response.data.results));
+    try {
+      const response = await axiosInstance.get("https://api.themoviedb.org/3/movie/now_playing?page=1");
+      dispatch(addNowPlayingMovies(response?.results));
+    } catch (error) {
+      console.error(error);
+    }
   };
   useEffect(() => {
     User && !nowPlayingMoviesInStore && getNowPlayingMovies();

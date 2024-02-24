@@ -1,3 +1,5 @@
+import axios from "axios";
+
 export const LOGO_URL =
   "https://cdn.cookielaw.org/logos/dd6b162f-1a32-456a-9cfe-897231c7763c/4345ea78-053c-46d2-b11e-09adaef973dc/Netflix_Logo_PMS.png";
 
@@ -16,6 +18,36 @@ export const API_OPTIONS = {
     Authorization: "Bearer " + process.env.REACT_APP_TMDB_KEY,
   },
 };
+export const axiosInstance = axios.create({
+  baseURL: 'https://api.themoviedb.org/3/movie', // Set your API base URL
+  timeout: 3000, // Set a timeout for requests (optional)
+  API_OPTIONS
+});
+
+// Add interceptors or other customizations if needed
+axiosInstance.interceptors.request.use(
+  (config) => {
+    // Modify the request configuration before sending
+    // For example, add an authorization header
+    config.headers.Authorization = `Bearer ${process.env.REACT_APP_TMDB_KEY}`;
+    return config;
+  },
+  (error) => {
+    // Handle request errors
+    return Promise.reject(error);
+  }
+);
+
+axiosInstance.interceptors.response.use(
+  (response) => {
+    // Modify the response data before resolving
+    return response?.data;
+  },
+  (error) => {
+    // Handle response errors
+    return Promise.reject(error);
+  }
+);
 
 export const OPENAI_API_KEY = process.env.REACT_APP_OPENAI_API_KEY;
 
