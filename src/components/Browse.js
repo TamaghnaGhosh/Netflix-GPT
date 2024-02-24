@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Header from "./Header";
 import useNowPlayingMovies from "../hooks/useNowPlayingMovies";
 import MainContainer from "./MainContainer/MainContainer";
@@ -7,15 +7,30 @@ import usePopularMovies from "../hooks/usePopularMovies";
 import useTopRatedMovies from "../hooks/useTopRatedMovies";
 import useUpcomingMovies from "../hooks/useUpcomingMovies";
 import GptSearch from "./GptSearchContainer/GptSearchPage";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { addGptMovieResult } from "../utils/Redux/gptSlice";
 
 const Browse = () => {
+  const dispatch = useDispatch();
+  const gptStore = useSelector((store) => store.gpt);
+
   useNowPlayingMovies();
   usePopularMovies();
   useTopRatedMovies();
   useUpcomingMovies();
 
-  const gptStore = useSelector((store) => store.gpt);
+  useEffect(() => {
+    if (!gptStore?.showGptSearch) {
+      dispatch(
+        addGptMovieResult({
+          movieNames: null,
+          movieResults: null,
+        })
+      );
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [gptStore?.showGptSearch]);
+
   return (
     <div>
       <Header />
