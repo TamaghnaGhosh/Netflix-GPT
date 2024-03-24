@@ -2,7 +2,7 @@ import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "../utils/services/firebase";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { addUser, removeUser } from "../utils/Redux/userSlice";
 import { AVATAR_URl, LOGO_URL, SUPPORTED_LANGUAGES } from "../utils/constant";
 import { toggleGptSearchView } from "../utils/Redux/gptSlice";
@@ -13,6 +13,9 @@ const Header = () => {
   const navigate = useNavigate();
   const User = useSelector((store) => store.user);
   const showGpt = useSelector((store) => store.gpt.showGptSearch);
+  const initaialLang = useSelector((store) => store.config.lang);
+  const [initaialLangState, setInitaialLangState] = useState(initaialLang);
+
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -56,6 +59,7 @@ const Header = () => {
   };
 
   const handleLangSelect = (e) => {
+    setInitaialLangState(e.target.value);
     // console.log(e.target.value);
     dispatch(changeLanguage(e.target.value));
   };
@@ -70,7 +74,8 @@ const Header = () => {
           {showGpt && (
             <select
               className="p-2 m-2 bg-gray-900 text-white rounded-lg"
-              onChange={handleLangSelect}
+              onChange={(e) => handleLangSelect(e)}
+              value={initaialLangState}
             >
               {SUPPORTED_LANGUAGES.map((lang) => (
                 <option key={lang.identifier} value={lang.identifier}>
