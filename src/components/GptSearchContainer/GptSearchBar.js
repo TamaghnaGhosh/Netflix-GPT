@@ -11,39 +11,43 @@ const GptSearchBar = () => {
   const searchText = useRef(null);
 
   const handleGptSearchClick = async () => {
-    //Make an api call to GPT api and get movie results
-    const gptQuery =
-      "Act as a movie Recommendation system and suggest some movies for the query : " +
-      searchText.current.value +
-      ". only give names of 5 movies, comma separated like the example result given ahead. Example Results: The Exorcist, The Shining ,Psycho, Get Out, Hereditary ";
+    try {
+      //Make an api call to GPT api and get movie results
+      const gptQuery =
+        "Act as a movie Recommendation system and suggest some movies for the query : " +
+        searchText.current.value +
+        ". only give names of 5 movies, comma separated like the example result given ahead. Example Results: The Exorcist, The Shining ,Psycho, Get Out, Hereditary ";
 
-    const gptResponse = await openai.chat.completions.create({
-      messages: [{ role: "user", content: gptQuery }],
-      model: "gpt-3.5-turbo",
-    });
+      const gptResponse = await openai.chat.completions.create({
+        messages: [{ role: "user", content: gptQuery }],
+        model: "gpt-3.5-turbo",
+      });
 
-    const gptMovieResponse =
-      gptResponse.choices?.[0]?.message?.content?.split(",");
+      const gptMovieResponse =
+        gptResponse.choices?.[0]?.message?.content?.split(",");
 
-    const promiseArrayOfMovies = gptMovieResponse?.map((itemMoviesGptGives) =>
-      //Search movie in TMDB database
-      fetchMovieFromTMDB(itemMoviesGptGives)
-    );
-    const tmdbResults = await Promise.allSettled(promiseArrayOfMovies);
-    const movieResultsPush = [];
-    for (const result of tmdbResults) {
-      if (result.status === "fulfilled") {
-        movieResultsPush.push(result.value);
-      } else {
-        console.error(result.reason);
+      const promiseArrayOfMovies = gptMovieResponse?.map((itemMoviesGptGives) =>
+        //Search movie in TMDB database
+        fetchMovieFromTMDB(itemMoviesGptGives)
+      );
+      const tmdbResults = await Promise.allSettled(promiseArrayOfMovies);
+      const movieResultsPush = [];
+      for (const result of tmdbResults) {
+        if (result.status === "fulfilled") {
+          movieResultsPush.push(result.value);
+        } else {
+          console.error(result.reason);
+        }
       }
+      dispatch(
+        addGptMovieResult({
+          movieNames: gptMovieResponse,
+          movieResults: movieResultsPush,
+        })
+      );
+    } catch (error) {
+      console.error(error?.message);
     }
-    dispatch(
-      addGptMovieResult({
-        movieNames: gptMovieResponse,
-        movieResults: movieResultsPush,
-      })
-    );
   };
 
   return (
