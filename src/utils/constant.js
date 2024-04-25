@@ -1,13 +1,13 @@
 import axios from "axios";
 
-// export const LOGO_URL =
-//   "https://cdn.cookielaw.org/logos/dd6b162f-1a32-456a-9cfe-897231c7763c/4345ea78-053c-46d2-b11e-09adaef973dc/Netflix_Logo_PMS.png";
+export const LOGO_URL =
+  "https://cdn.cookielaw.org/logos/dd6b162f-1a32-456a-9cfe-897231c7763c/4345ea78-053c-46d2-b11e-09adaef973dc/Netflix_Logo_PMS.png";
 
 // export const LOGO_URL =
 //   "https://images.crowdspring.com/blog/wp-content/uploads/2016/06/27132348/netflix-new-logo.png";
 
-export const LOGO_URL =
-  "https://cdn.dribbble.com/users/9378043/screenshots/16832559/media/10b207c918d604662e088308d16b366d.png";
+// export const LOGO_URL =
+//   "https://cdn.dribbble.com/users/9378043/screenshots/16832559/media/10b207c918d604662e088308d16b366d.png";
 
 export const AVATAR_URl =
   "https://upload.wikimedia.org/wikipedia/commons/0/0b/Netflix-avatar.png";

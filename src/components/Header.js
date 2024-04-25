@@ -20,6 +20,7 @@ const Header = () => {
       if (user) {
         // User is signed in, see docs for a list of available properties
         const { uid, email, displayName, photoURL } = user;
+        document.title = displayName;
         dispatch(
           addUser({
             uid: uid,
@@ -33,6 +34,7 @@ const Header = () => {
         // User is signed out
         dispatch(removeUser());
         navigate("/");
+        document.title = "Tamaghna-Netflix-GPT-APP";
       }
     });
     return () => {

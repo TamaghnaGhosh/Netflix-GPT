@@ -13,7 +13,6 @@ import { addGptMovieResult } from "../utils/Redux/gptSlice";
 const Browse = () => {
   const dispatch = useDispatch();
   const gptStore = useSelector((store) => store.gpt);
-  const user = useSelector((store) => store.user);
 
   useNowPlayingMovies();
   usePopularMovies();
@@ -22,11 +21,6 @@ const Browse = () => {
 
   useEffect(() => {
     if (!gptStore?.showGptSearch) {
-      console.log("🚀 ~ Browse ~ user:", user?.displayName);
-      document.title =
-        user?.displayName !== undefined
-          ? user?.displayName
-          : "Tamaghna-Netflix-GPT-APP";
       dispatch(
         addGptMovieResult({
           movieNames: null,
