@@ -34,7 +34,7 @@ const Header = () => {
         // User is signed out
         dispatch(removeUser());
         navigate("/");
-        document.title = "Tamaghna-Netflix-GPT-APP";
+        document.title = "Homepage of Netflix-GPT-APP";
       }
     });
     return () => {
