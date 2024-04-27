@@ -1,7 +1,10 @@
 import axios from "axios";
 
+// export const LOGO_URL =
+//   "https://cdn.cookielaw.org/logos/dd6b162f-1a32-456a-9cfe-897231c7763c/4345ea78-053c-46d2-b11e-09adaef973dc/Netflix_Logo_PMS.png";
+
 export const LOGO_URL =
-  "https://cdn.cookielaw.org/logos/dd6b162f-1a32-456a-9cfe-897231c7763c/4345ea78-053c-46d2-b11e-09adaef973dc/Netflix_Logo_PMS.png";
+  "https://cdn.vox-cdn.com/thumbor/cCfh74clvUQ65ju4cYXeW5eCizo=/0x0:2040x1360/1400x788/filters:focal(1020x680:1021x681)/cdn.vox-cdn.com/uploads/chorus_asset/file/23951361/STK072_VRG_Illo_N_Barclay_7_netflix.jpg";
 
 // export const LOGO_URL =
 //   "https://images.crowdspring.com/blog/wp-content/uploads/2016/06/27132348/netflix-new-logo.png";
