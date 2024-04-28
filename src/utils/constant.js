@@ -3,8 +3,11 @@ import axios from "axios";
 // export const LOGO_URL =
 //   "https://cdn.cookielaw.org/logos/dd6b162f-1a32-456a-9cfe-897231c7763c/4345ea78-053c-46d2-b11e-09adaef973dc/Netflix_Logo_PMS.png";
 
+// export const LOGO_URL =
+//   "https://cdn.vox-cdn.com/thumbor/cCfh74clvUQ65ju4cYXeW5eCizo=/0x0:2040x1360/1400x788/filters:focal(1020x680:1021x681)/cdn.vox-cdn.com/uploads/chorus_asset/file/23951361/STK072_VRG_Illo_N_Barclay_7_netflix.jpg";
+
 export const LOGO_URL =
-  "https://cdn.vox-cdn.com/thumbor/cCfh74clvUQ65ju4cYXeW5eCizo=/0x0:2040x1360/1400x788/filters:focal(1020x680:1021x681)/cdn.vox-cdn.com/uploads/chorus_asset/file/23951361/STK072_VRG_Illo_N_Barclay_7_netflix.jpg";
+  "https://res.cloudinary.com/teepublic/image/private/s--p2tXZ6AJ--/c_crop,x_10,y_10/c_fit,w_934/c_crop,g_north_west,h_1038,w_1038,x_-52,y_-417/l_upload:v1565806151:production:blanks:vdbwo35fw6qtflw9kezw/fl_layer_apply,g_north_west,x_-163,y_-528/b_rgb:000000/c_limit,f_auto,h_630,q_auto:good:420,w_630/v1668196958/production/designs/36443728_0.jpg";
 
 // export const LOGO_URL =
 //   "https://images.crowdspring.com/blog/wp-content/uploads/2016/06/27132348/netflix-new-logo.png";

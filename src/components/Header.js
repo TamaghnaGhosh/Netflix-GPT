@@ -34,7 +34,7 @@ const Header = () => {
         // User is signed out
         dispatch(removeUser());
         navigate("/");
-        document.title = "Homepage of Netflix-GPT-APP";
+        document.title = "Homepage of chill-Time";
       }
     });
     return () => {
@@ -67,7 +67,7 @@ const Header = () => {
   return (
     <div className="absolute w-screen px-8 py-4 bg-gradient-to-b from-black z-10 flex md:flex-row flex-col justify-between ">
       <div className="cursor-pointer">
-        <img className="w-52 h-16 md:mx-0 mx-auto" src={LOGO_URL} alt="logo" />
+        <img className="w-20 h-16 md:mx-0 mx-auto" src={LOGO_URL} alt="logo" />
       </div>
       {User && (
         <div className="flex p-2 justify-between">
