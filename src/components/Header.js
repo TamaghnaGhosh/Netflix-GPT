@@ -33,6 +33,9 @@ const Header = () => {
       } else {
         // User is signed out
         dispatch(removeUser());
+        // dispatch(toggleGptSearchView());
+        handleGptSearchClick();
+        dispatch(changeLanguage("en"));
         navigate("/");
         document.title = "Homepage of chill-Time";
       }
@@ -56,7 +59,12 @@ const Header = () => {
   };
 
   const handleGptSearchClick = () => {
-    dispatch(toggleGptSearchView());
+    if (showGpt) {
+      dispatch(toggleGptSearchView(false));
+    } else {
+      dispatch(toggleGptSearchView(true));
+    }
+    // dispatch(toggleGptSearchView());
   };
 
   const handleLangSelect = (e) => {
@@ -67,7 +75,11 @@ const Header = () => {
   return (
     <div className="absolute w-screen px-8 py-4 bg-gradient-to-b from-black z-10 flex md:flex-row flex-col justify-between ">
       <div className="cursor-pointer">
-        <img className="w-20 h-16 md:mx-0 mx-auto" src={LOGO_URL} alt="logo" />
+        <img
+          className="w-24 h-16 md:mx-0 mx-auto rounded-xl"
+          src={LOGO_URL}
+          alt="logo"
+        />
       </div>
       {User && (
         <div className="flex p-2 justify-between">
